@@ -69,4 +69,16 @@ public class TaskController {
 				return null;
 			}
 	
+	@PutMapping("/todo/completed/{taskId}") //toggle
+	public Task completedTask(
+			@PathVariable (value = "taskId") int taskId) {
+		Optional<Task> t=taskRepository.findById(taskId);
+		if(t.isPresent()) {
+			Task t1=t.get();
+			t1.setDone(true);
+			return taskRepository.save(t1);
+		} else
+				return null;
+			}
+	
 }
